@@ -10,7 +10,7 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
-    const response= await fetch("http://localhost:8000/api/auth/login", {
+    const response= await fetch("http://65.2.189.213:8000/api/auth/login", {
 
         method: "POST",
         headers: {
