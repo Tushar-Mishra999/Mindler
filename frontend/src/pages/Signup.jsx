@@ -1,20 +1,16 @@
 // Signup.js
 
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Auth.css"; // Import the styling
 
 function Signup() {
-  const history = useHistory();
+  const history = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSignup = async () => {
-    //call the signup API
-
-    // After successful signup, navigate to the Login screen
-
     const response= await fetch("http://localhost:8000/api/auth/signup", {
 
         method: "POST",
@@ -28,8 +24,8 @@ function Signup() {
         })
     });
     const data = await response.json();
-    if(data.success){
-        history.push("/login");
+    if(response.status === 200){
+        history("/");
     } else {
         alert(data.message);
     }

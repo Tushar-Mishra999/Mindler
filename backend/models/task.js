@@ -18,6 +18,10 @@ const taskSchema = new mongoose.Schema({
     dueDate: {
         type: String,
         required: true
+    },
+    user_id: {
+        type: String,
+        required: true
     }
 });
 

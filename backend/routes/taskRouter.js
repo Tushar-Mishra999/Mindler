@@ -6,7 +6,9 @@ const Task=require('../models/task');
 
 taskRouter.get('/getAllTasks',async(req,res)=>{
     try{
-        const tasks=await Task.find({});
+        const email=req.query.email;
+        const tasks=await Task.find({user_id:email});
+
         res.status(200).json({tasks});
     }catch(error){
         res.status(500).json({error});
@@ -18,6 +20,7 @@ taskRouter.get('/getAllTasks',async(req,res)=>{
 
 taskRouter.post('/addTask',async(req,res)=>{
     try{
+        console.log(req.body);
         const task=await Task.create(req.body);
         res.status(200).json({task});
     }catch(error){

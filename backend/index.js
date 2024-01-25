@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const app = express();
 
 const taskRouter = require("./routes/taskRouter");
+const authRouter = require("./routes/authRouter");
 
 app.use(
   cors({
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/task", taskRouter);
+app.use("/api/auth", authRouter);
 
 
 mongoose

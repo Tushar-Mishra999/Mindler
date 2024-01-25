@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import "./Home.css";
-
+import { useLocation } from "react-router-dom";
 
 
 
@@ -17,6 +17,9 @@ function Home() {
         description: "",
         dueDate: ""
     });
+
+    const location = useLocation();
+    const email = location.state && location.state.email;
 
     const [showTaskDialog, setShowTaskDialog] = useState(false);
     const [selectedTask, setSelectedTask] = useState(null);
@@ -62,7 +65,7 @@ function Home() {
     };
 
     const getTasks = async () => {
-        const response = await fetch("http://localhost:8000/api/task/getAllTasks");
+        const response = await fetch(`http://localhost:8000/api/task/getAllTasks?email=${email}`);
         const data = await response.json();
         return data["tasks"];
     }
@@ -92,12 +95,15 @@ function Home() {
 
     
     const handleAddTask = async () => {
+        const newMap={user_id:email,...newTask};
+        console.log(newMap);
+        
         const response = await fetch("http://localhost:8000/api/task/addTask", {
         method: "POST",
         headers: {
             "Content-type": "application/json",
         },
-        body: JSON.stringify(newTask),
+        body: JSON.stringify(newMap),
         });
 
         setShowAddDialog(false);
@@ -151,6 +157,12 @@ function Home() {
     return (
         <div className="container">
         <h1>Task Tracker</h1>
+        <p>
+        Welcome, {email}!{" "}
+        <Link to="/" className="logout-link">
+          Logout
+        </Link>
+      </p>
         <table className="table">
             <thead>
             <tr>

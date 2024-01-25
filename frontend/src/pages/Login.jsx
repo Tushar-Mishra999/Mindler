@@ -1,20 +1,35 @@
 // Login.js
 
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import "./Auth.css"; // Import the styling
 
 function Login() {
-  const history = useHistory();
+  const history = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    // Implement your login logic here
+  const handleLogin = async () => {
+    const response= await fetch("http://localhost:8000/api/auth/login", {
 
-    // After successful login, navigate to the Home screen
-    history.push("/home");
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            email,
+            password,
+        })
+    });
+    const data = await response.json();
+    if(response.status === 200){
+        history("/home",{state: {email: email}});
+    } else {
+        alert(data.message);
+    }
   };
+
+ 
 
   return (
     <div className="auth-container">
@@ -35,6 +50,14 @@ function Login() {
         <button type="button" onClick={handleLogin}>
           Login
         </button>
+        <p>
+        <span>
+            New User?{" "}
+            <Link to="/signup" className="signup-link">
+              Sign up
+            </Link>
+          </span>
+        </p>
       </form>
     </div>
   );
