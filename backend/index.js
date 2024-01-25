@@ -6,6 +6,7 @@ dotenv.config();
 const mongoose = require("mongoose");
 const app = express();
 
+
 app.use(
   cors({
     origin: "*",
@@ -14,8 +15,10 @@ app.use(
 
 app.use(express.json());
 
+
+
 mongoose
-    .connect(process.env.DB_URL)
+    .connect("mongodb+srv://tm217:Tushar16@cluster0.aqzeo9l.mongodb.net/?retryWrites=true&w=majority")
     .then(() => {
       console.log("Successfully connected to db");
     })
