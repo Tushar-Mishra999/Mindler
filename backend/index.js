@@ -6,6 +6,7 @@ dotenv.config();
 const mongoose = require("mongoose");
 const app = express();
 
+const taskRouter = require("./routes/taskRouter");
 
 app.use(
   cors({
@@ -14,7 +15,9 @@ app.use(
 );
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+app.use("/api/task", taskRouter);
 
 
 mongoose

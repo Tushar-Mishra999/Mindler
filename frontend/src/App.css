@@ -201,3 +201,42 @@ p {
 .link {
   font-weight: 800;
 }
+
+/* Add this CSS to your existing Home.css file or create a new CSS file for dialog styles */
+
+.dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.dialog h2 {
+  margin-bottom: 10px;
+}
+
+.dialog label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.dialog input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+}
+
+.dialog button {
+  padding: 8px 15px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.dialog button:last-child {
+  margin-right: 0;
+}
