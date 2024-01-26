@@ -1,8 +1,6 @@
-// Login.js
-
 import React, { useState } from "react";
 import { useNavigate,Link } from "react-router-dom";
-import "./Auth.css"; // Import the styling
+import "./Auth.css";
 
 function Login() {
   const history = useNavigate();
@@ -10,7 +8,7 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
-    const response= await fetch("http://65.2.189.213:8000/api/auth/login", {
+    const response= await fetch("http://localhost:8000/api/auth/login", {
 
         method: "POST",
         headers: {
@@ -39,19 +37,21 @@ function Login() {
         <input
           type="email"
           value={email}
+          className="input"
           onChange={(e) => setEmail(e.target.value)}
         />
         <label>Password:</label>
         <input
           type="password"
           value={password}
+          className="input"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="button" onClick={handleLogin}>
+        <button type="button" className="button" onClick={handleLogin}>
           Login
         </button>
-        <p>
-        <span>
+        <p className="center-title">
+        <span >
             New User?{" "}
             <Link to="/signup" className="signup-link">
               Sign up

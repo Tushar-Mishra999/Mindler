@@ -65,7 +65,7 @@ function Home() {
     };
 
     const getTasks = async () => {
-        const response = await fetch(`http://65.2.189.213:8000/api/task/getAllTasks?email=${email}`);
+        const response = await fetch(`http://localhost:8000/api/task/getAllTasks?email=${email}`);
         const data = await response.json();
         return data["tasks"];
     }
@@ -88,7 +88,7 @@ function Home() {
     };
 
     const deleteTask = async (id) => {
-        await fetch(`http://65.2.189.213:8000/api/task/deleteTask?taskId=${id}`, {
+        await fetch(`http://localhost:8000/api/task/deleteTask?taskId=${id}`, {
         method: "DELETE",
         });
     };
@@ -98,7 +98,7 @@ function Home() {
         const newMap={user_id:email,...newTask};
         console.log(newMap);
         
-        const response = await fetch("http://65.2.189.213:8000/api/task/addTask", {
+        const response = await fetch("http://localhost:8000/api/task/addTask", {
         method: "POST",
         headers: {
             "Content-type": "application/json",
@@ -118,7 +118,7 @@ function Home() {
 
     const handleEditTask = async () => {
         
-        const response = await fetch("http://65.2.189.213:8000/api/task/updateTask", {
+        const response = await fetch("http://localhost:8000/api/task/updateTask", {
         method: "PUT",
         headers: {
             "Content-type": "application/json",
@@ -137,7 +137,7 @@ function Home() {
     }
 
     const handleCompleteTask=async(id)=>{
-        const response = await fetch(`http://65.2.189.213:8000/api/task/completeTask?taskId=${id}`, {
+        const response = await fetch(`http://localhost:8000/api/task/completeTask?taskId=${id}`, {
             method: "PUT",
             headers: {
                 "Content-type": "application/json",
@@ -155,9 +155,9 @@ function Home() {
 
     
     return (
-        <div className="container">
+        <div className="home-container">
         <h1>Task Tracker</h1>
-        <p>
+        <p className="center-title">
         Welcome, {email}!{" "}
         <Link to="/" className="logout-link">
           Logout
@@ -175,22 +175,22 @@ function Home() {
             {tasks.map((task) => (
                 <tr key={task.id}>
                 <td><button
-                                    className="button link-button"
+                                    className="button-title"
                                     onClick={() => handleTaskClick(task)}
                                 >
                                     {task.title}
                                 </button></td>
                 <td>{task.status}</td>
                 <td>
-                    <button className="button muted-button" onClick={()=>handleEditDialog(task)}>Edit</button>
+                    <button className=" muted-button" onClick={()=>handleEditDialog(task)}>Edit</button>
                     <button
-                    className="button muted-button"
+                    className="muted-button"
                     onClick={() => handleDelete(task._id)}
                     >
                     Delete
                     </button>
                     <button
-                    className="button muted-button"
+                    className="muted-button"
                     onClick={() => handleCompleteTask(task._id)}
                     >
                     Change Status
@@ -202,19 +202,22 @@ function Home() {
         </table>
 
         {showTaskDialog && selectedTask && (
+            <div className="background-blur">
                 <div className="dialog">
                     <h2>{selectedTask.title}</h2>
                     <p><strong>Description:</strong> {selectedTask.description}</p>
                     <p><strong>Due Date:</strong> {selectedTask.dueDate}</p>
                     <p><strong>Status:</strong> {selectedTask.status}</p>
-                    <button onClick={() => setShowTaskDialog(false)}>Close</button>
+                    <button className="button-dialog" onClick={() => setShowTaskDialog(false)} >Close</button>
                 </div>
+            </div>
             )}
 
 
 
-            <button className="button" onClick={handleAddDialog}>Add New Task</button>
+            <button className="task-button" onClick={handleAddDialog}>Add New Task</button>
             {showAddDialog && (
+                 <div className="background-blur">
                 <div className="dialog">
                     <h2>Add New Task</h2>
                     <label>Title:</label>
@@ -235,13 +238,15 @@ function Home() {
                         value={newTask.dueDate}
                         onChange={(e) => setNewTask({ ...newTask, dueDate: e.target.value })}
                     />
-                    <button onClick={handleAddTask}>Add Task</button>
-                    <button onClick={handleCloseDialog}>Cancel</button>
+                    <button onClick={handleAddTask} className="button-dialog">Add Task</button>
+                    <button onClick={handleCloseDialog} className="button-dialog">Cancel</button>
+                </div>
                 </div>
             )}
 
 
 {showEditDialog && (
+     <div className="background-blur">
                 <div className="dialog">
                     <h2>Add New Task</h2>
                     <label>Title:</label>
@@ -262,8 +267,9 @@ function Home() {
                         value={editTask.dueDate}
                         onChange={(e) => setEditTask({ ...editTask, dueDate: e.target.value })}
                     />
-                    <button onClick={handleEditTask}>Update</button>
-                    <button onClick={handleEditCloseDialog}>Cancel</button>
+                    <button onClick={handleEditTask} className="button-dialog">Update</button>
+                    <button onClick={handleEditCloseDialog} className="button-dialog">Cancel</button>
+                </div>
                 </div>
             )}
         </div>
