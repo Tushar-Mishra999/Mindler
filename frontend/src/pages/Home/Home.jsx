@@ -65,7 +65,7 @@ function Home() {
     };
 
     const getTasks = async () => {
-        const response = await fetch(`http://localhost:8000/api/task/getAllTasks?email=${email}`);
+        const response = await fetch(`http://65.2.189.213:8000/api/task/getAllTasks?email=${email}`);
         const data = await response.json();
         return data["tasks"];
     }
@@ -88,7 +88,7 @@ function Home() {
     };
 
     const deleteTask = async (id) => {
-        await fetch(`http://localhost:8000/api/task/deleteTask?taskId=${id}`, {
+        await fetch(`http://65.2.189.213:8000/api/task/deleteTask?taskId=${id}`, {
         method: "DELETE",
         });
     };
@@ -98,7 +98,7 @@ function Home() {
         const newMap={user_id:email,...newTask};
         console.log(newMap);
         
-        const response = await fetch("http://localhost:8000/api/task/addTask", {
+        const response = await fetch("http://65.2.189.213:8000/api/task/addTask", {
         method: "POST",
         headers: {
             "Content-type": "application/json",
@@ -118,7 +118,7 @@ function Home() {
 
     const handleEditTask = async () => {
         
-        const response = await fetch("http://localhost:8000/api/task/updateTask", {
+        const response = await fetch("http://65.2.189.213:8000/api/task/updateTask", {
         method: "PUT",
         headers: {
             "Content-type": "application/json",
@@ -137,7 +137,7 @@ function Home() {
     }
 
     const handleCompleteTask=async(id)=>{
-        const response = await fetch(`http://localhost:8000/api/task/completeTask?taskId=${id}`, {
+        const response = await fetch(`http://65.2.189.213:8000/api/task/completeTask?taskId=${id}`, {
             method: "PUT",
             headers: {
                 "Content-type": "application/json",

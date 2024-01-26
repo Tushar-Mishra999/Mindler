@@ -10,7 +10,7 @@ function Signup() {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSignup = async () => {
-    const response= await fetch("http://localhost:8000/api/auth/signup", {
+    const response= await fetch("http://65.2.189.213:8000/api/auth/signup", {
 
         method: "POST",
         headers: {
