@@ -2,7 +2,7 @@ const express = require('express');
 const authRouter = express.Router();
 const User = require('../models/user');
 
-
+//singup api
 authRouter.post('/signup', async (req, res) => {
     try {
         
@@ -27,6 +27,8 @@ authRouter.post('/signup', async (req, res) => {
         res.status(500).json({ error });
     }});
 
+
+//login api
 authRouter.post('/login', async (req, res) => {
 
     try {

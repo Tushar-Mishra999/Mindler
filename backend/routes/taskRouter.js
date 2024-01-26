@@ -53,11 +53,11 @@ taskRouter.put('/updateTask',async(req,res)=>{
     const updatedTask=req.body;
 
     try{
-        //find and update the task
+
         const result = await Task.findOneAndUpdate(
             { _id: taskId },
             { $set: updatedTask },
-            { new: true } // Return the updated document
+            { new: true } 
         );
         res.status(200).json({result});
     }
@@ -71,7 +71,6 @@ taskRouter.put('/updateTask',async(req,res)=>{
 
 taskRouter.put('/completeTask',async(req,res)=>{
     const taskId=req.query.taskId;
-    //if status is completed then change it to pending and vice versa
     try{
         const task=await Task.findById(taskId);
         if(task.status==='completed'){
